@@ -43,11 +43,6 @@ class DatabaseConnectionFactory extends ConnectionFactory
     {
         $key = $name ?? $config['name'];
 
-        // SQLite doesn't have any max connections limitation so it should be safe to just create a new connection between tests.
-        if ($config['driver'] === 'sqlite' && $config['database'] === ':memory:') {
-            return $this->factory->make($config, $name);
-        }
-
         if (! isset(static::$cachedConnections[$key]) || is_null(static::$cachedConnections[$key]->getRawPdo() ?? null)) {
             return static::$cachedConnections[$key] = $this->factory->make($config, $name);
         }

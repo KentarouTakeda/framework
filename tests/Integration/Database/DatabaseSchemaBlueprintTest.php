@@ -18,6 +18,7 @@ class DatabaseSchemaBlueprintTest extends TestCase
     {
         $this->beforeApplicationDestroyed(function () {
             Schema::useNativeSchemaOperationsIfPossible(false);
+            Schema::dropAllTables();
         });
 
         parent::setUp();
