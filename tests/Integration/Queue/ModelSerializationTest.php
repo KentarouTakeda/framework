@@ -27,6 +27,10 @@ class ModelSerializationTest extends TestCase
     {
         parent::setUp();
 
+        $this->beforeApplicationDestroyed(function () {
+            Schema::dropAllTables();
+        });
+
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('email');
